@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BADE - Iniciar Sesión</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-card">
+        <!-- Avatar Header -->
+        <div class="auth-avatar-circle">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <form action="procesar_login.php" method="POST" id="login-form" class="auth-form">
+            <!-- Campo Usuario / Mail -->
+            <div class="input-group">
+                <input type="text" name="usuario" id="login-user" placeholder="User/mail..." required>
+            </div>
+
+            <!-- Campo Contraseña -->
+            <div class="input-group">
+                <input type="password" name="password" id="login-password" placeholder="Contraseña..." required>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="auth-buttons">
+                <a href="index.php" class="btn-back">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
+                </a>
+                <button type="submit" class="btn-submit">Enviar</button>
+            </div>
+
+            <!-- Enlace a Registro -->
+            <div class="auth-link">
+                <a href="register.html">¿no tienes cuenta? Registrate</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
