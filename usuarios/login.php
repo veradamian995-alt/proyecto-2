@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BADE - Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="auth-body">
@@ -16,19 +16,19 @@
         </div>
 
         <form action="procesar_login.php" method="POST" id="login-form" class="auth-form">
-            <!-- Campo Usuario / Mail -->
+            <!-- Campo Mail (Cambiado a name="email" para que coincida con el backend) -->
             <div class="input-group">
-                <input type="text" name="usuario" id="login-user" placeholder="User/mail..." required>
+                <input type="text" name="email" id="login-user" placeholder="Correo electrónico..." required>
             </div>
 
-            <!-- Campo Contraseña -->
+            <!-- Campo Contraseña (Cambiado a name="password") -->
             <div class="input-group">
-                <input type="password" name="password" id="login-password" placeholder="Contraseña..." required>
+                <input type="password" name="password" id="login-password" placeholder="Contrasena..." required>
             </div>
 
             <!-- Botones de Acción -->
             <div class="auth-buttons">
-                <a href="index.php" class="btn-back">
+                <a href="href=../index.php" class="btn-back">
                     <i class="fa-solid fa-arrow-left"></i> Volver
                 </a>
                 <button type="submit" class="btn-submit">Enviar</button>
@@ -36,11 +36,11 @@
 
             <!-- Enlace a Registro -->
             <div class="auth-link">
-                <a href="register.html">¿no tienes cuenta? Registrate</a>
+                <a href="register.php">¿no tienes cuenta? Registrate</a>
             </div>
         </form>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

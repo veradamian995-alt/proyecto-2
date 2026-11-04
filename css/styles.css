@@ -718,8 +718,3 @@ body {
 .auth-link a:hover {
     color: var(--accent-yellow);
 }
-.cat-btn.disabled-link {
-    opacity: 0.5;
-    pointer-events: none;
-    cursor: not-allowed;
-}

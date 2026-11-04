@@ -85,3 +85,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const botonesCategoria = document.querySelectorAll(".cat-btn");
+
+    botonesCategoria.forEach(boton => {
+        boton.addEventListener("click", () => {
+            // Quitamos la clase 'active' de todos los botones y se la ponemos al presionado
+            botonesCategoria.forEach(b => b.classList.remove("active"));
+            boton.classList.add("active");
+
+            // Aquí puedes activar la lógica para mostrar la grilla masiva de productos
+            const categoriaSeleccionada = boton.getAttribute("data-categoria");
+            console.log("Categoría seleccionada:", categoriaSeleccionada);
+            
+            // Si ya tienes tus tarjetas de productos en el HTML, puedes asegurarte de que se muestren:
+            const gridProductos = document.getElementById("products-grid");
+            if (gridProductos) {
+                gridProductos.style.display = "grid";
+            }
+        });
+    });
+});
