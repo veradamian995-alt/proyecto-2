@@ -28,9 +28,9 @@
 
             <!-- Botones de Acción -->
             <div class="auth-buttons">
-                <a href="href=../index.php" class="btn-back">
-                    <i class="fa-solid fa-arrow-left"></i> Volver
-                </a>
+               <a href="../index.php" class="btn-back">
+                 <i class="fa-solid fa-arrow-left"></i> Volver
+               </a>
                 <button type="submit" class="btn-submit">Enviar</button>
             </div>
 

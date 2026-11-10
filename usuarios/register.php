@@ -10,7 +10,7 @@
 <body class="auth-body">
 
     <div class="auth-card">
-        <!-- Logo Header -->
+        <!-- Logo Header -->                                    
         <div class="auth-logo">
             <a href="../index.php">
                 <img src="../assets/images/logo-bade.png" alt="BADE Logo" class="auth-logo-img">
@@ -20,20 +20,35 @@
         <form action="registrar_usuario.php" method="POST" id="register-form" class="auth-form">
         
 
-            <!-- Campo Mail -->
+           <!-- Campo Mail -->
             <div class="input-group">
-                <input type="email" name="email" id="reg-email" placeholder="mail..." required>
+                <input type="email" name="email" id="reg-email" placeholder="mail..." required 
+                       oninvalid="this.setCustomValidity('Por favor, ingresa tu correo electrónico para registrarte en BADE.');" 
+                       oninput="this.setCustomValidity('');">
             </div>
 
             <!-- Campo Contraseña -->
             <div class="input-group">
-                <input type="password" name="password" id="reg-password" placeholder="Contrasena..." required>
+                <input type="password" name="password" id="reg-password" placeholder="Contraseña..." required 
+                       oninvalid="this.setCustomValidity('Por favor, ingresa una contraseña.');" 
+                       oninput="this.setCustomValidity('');">
             </div>
 
             <!-- Campo Teléfono -->
             <div class="input-group">
-                <input type="tel" name="telefono" id="reg-phone" placeholder="Teléfono..." required>
+                <input type="tel" name="telefono" id="reg-phone" placeholder="Teléfono..." required 
+                       oninvalid="this.setCustomValidity('Por favor, completa tu número de teléfono.');" 
+                       oninput="this.setCustomValidity('');">
             </div>
+
+            <!-- Campo Dirección -->
+            <div class="input-group">
+                <input type="text" name="direccion" placeholder="Dirección de entrega (Calle, Número, Ciudad)..." required 
+                       oninvalid="this.setCustomValidity('Por favor, ingresa tu dirección de entrega.');" 
+                       oninput="this.setCustomValidity('');">
+            </div>
+
+            
 
             <!-- Botones de Acción -->
             <div class="auth-buttons">

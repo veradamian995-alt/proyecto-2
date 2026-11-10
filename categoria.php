@@ -39,61 +39,60 @@ $categoria_elegida = isset($_GET['cat']) ? $_GET['cat'] : 'general';
 
     <!-- Script para consumir la API de DummyJSON con gran variedad de productos -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const categoriaActual = "<?php echo strtolower($categoria_elegida); ?>";
-            const gridContainer = document.getElementById("api-products-grid");
+    document.addEventListener("DOMContentLoaded", () => {
+        const categoriaActual = "<?php echo strtolower($categoria_elegida); ?>";
+        const gridContainer = document.getElementById("api-products-grid");
 
-            // Solicitamos 100 productos para tener variedad de sobra en cada categoría
-            fetch('https://dummyjson.com/products?limit=100')
-                .then(response => response.json())
-                .then(data => {
-                    gridContainer.innerHTML = ""; 
-                    const productos = data.products;
-                    let productosAMostrar = [];
+        fetch('https://dummyjson.com/products?limit=100')
+            .then(response => response.json())
+            .then(data => {
+                gridContainer.innerHTML = ""; 
+                const productos = data.products;
+                let productosAMostrar = [];
 
-                    // Mapeamos nuestras categorías del menú a las categorías de la API
-                    if (categoriaActual === 'tecnologia') {
-                        productosAMostrar = productos.filter(p => p.category === 'smartphones' || p.category === 'laptops' || p.category === 'tablets');
-                    } else if (categoriaActual === 'hogar') {
-                        productosAMostrar = productos.filter(p => p.category === 'home-decoration' || p.category === 'furniture' || p.category === 'lighting');
-                    } else if (categoriaActual === 'ropa') {
-                        productosAMostrar = productos.filter(p => p.category.includes('mens') || p.category.includes('womens') || p.category === 'tops');
-                    } else if (categoriaActual === 'deportes') {
-                        productosAMostrar = productos.filter(p => p.category === 'sports-accessories' || p.category === 'vehicle' || p.category === 'groceries');
-                    } else {
-                        productosAMostrar = productos; // Si es 'mas', muestra todos
-                    }
+                if (categoriaActual === 'tecnologia') {
+                    productosAMostrar = productos.filter(p => p.category === 'smartphones' || p.category === 'laptops' || p.category === 'tablets' || p.category === 'mobile-accessories');
+                } else if (categoriaActual === 'hogar') {
+                    productosAMostrar = productos.filter(p => p.category === 'home-decoration' || p.category === 'furniture' || p.category === 'lighting');
+                } else if (categoriaActual === 'ropa') {
+                    productosAMostrar = productos.filter(p => p.category.includes('mens') || p.category.includes('womens') || p.category === 'tops' || p.category === 'sunglasses');
+                } else if (categoriaActual === 'belleza') {
+                    productosAMostrar = productos.filter(p => p.category === 'beauty' || p.category === 'vehicle');
+                } else {
+                    productosAMostrar = productos; 
+                }
 
-                    // Si alguna categoría queda corta, rellenamos con más productos para que la grilla luzca llena
-                    if (productosAMostrar.length < 10) {
-                        productosAMostrar = productos;
-                    }
+                if (productosAMostrar.length === 0) {
+                    productosAMostrar = productos;
+                }
 
-                    productosAMostrar.forEach(producto => {
-                        const card = document.createElement("article");
-                        card.classList.add("product-card");
-                        
-                        // Usamos la primera imagen del arreglo de imágenes que provee la API
-                        const imagenProd = producto.images && producto.images.length > 0 ? producto.images[0] : producto.thumbnail;
+                productosAMostrar.forEach(producto => {
+                    const card = document.createElement("article");
+                    card.classList.add("product-card");
+                    
+                    const imagenProd = producto.images && producto.images.length > 0 ? producto.images[0] : producto.thumbnail;
 
-                        card.innerHTML = `
-                            <div class="product-image-container">
+                    // Enlace directo hacia la página de detalles en la carpeta tienda/
+                    card.innerHTML = `
+                        <div class="product-image-container">
+                            <a href="tienda/producto.php?id=${producto.id}">
                                 <img src="${imagenProd}" alt="${producto.title}" class="product-img">
-                            </div>
-                            <div class="product-info-box">
-                                <p class="product-title">${producto.title}</p>
-                                <span class="product-price">$${producto.price}</span>
-                                <a href="#" class="btn-buy">COMPRAR AHORA</a>
-                            </div>
-                        `;
-                        gridContainer.appendChild(card);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error al cargar la API:", error);
-                    gridContainer.innerHTML = "<p style='color:white; text-align:center; grid-column:span 3;'>Error al conectar con el servidor de productos.</p>";
+                            </a>
+                        </div>
+                        <div class="product-info-box">
+                            <p class="product-title">${producto.title}</p>
+                            <span class="product-price">$${producto.price}</span>
+                            <a href="tienda/producto.php?id=${producto.id}" class="btn-buy" style="text-decoration: none; display: inline-block; text-align: center;">COMPRAR AHORA</a>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
                 });
-        });
-    </script>
+            })
+            .catch(error => {
+                console.error("Error al cargar la API:", error);
+                gridContainer.innerHTML = "<p style='color:white; text-align:center; grid-column:span 3;'>Error al conectar con el servidor de productos.</p>";
+            });
+    });
+</script>
 </body>
 </html>

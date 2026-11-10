@@ -1,10 +1,11 @@
 <?php
-include("conexion/conexion.php");
+include("../conexion/conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
-    $password_ingresada = trim($_POST['password']);
+    $password_ingresada = trim($_POST['password']);             
     $telefono = trim($_POST['telefono']);
+    $direccion = trim($_POST['direccion']); 
 
     // Encriptamos la contraseña de forma segura
     $password_cifrada = password_hash($password_ingresada, PASSWORD_DEFAULT);
@@ -21,11 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($verificar->num_rows > 0) {
         echo "<script>alert('El correo ya está registrado.'); window.location.href='register.php';</script>";
     } else {
-        // Usamos 'contrasena' sin eñe
-        $sql = "INSERT INTO usuarios (nombre, email, contrasena, telefono, tipo, fecha_registro) VALUES (?, ?, ?, ?, ?, ?)";
+        // Indicamos las 7 columnas exactas que corresponden a los 7 parámetros
+        $sql = "INSERT INTO usuarios (nombre, email, telefono, direccion, tipo, fecha_registro, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conexion->prepare($sql);
         
-        $stmt->bind_param("ssssss", $nombre, $email, $password_cifrada, $telefono, $tipo, $fecha_registro);
+        // Pasamos las 7 variables ("sssssss" indica que las 7 son strings)
+        $stmt->bind_param("sssssss", $nombre, $email, $telefono, $direccion, $tipo, $fecha_registro, $password_cifrada);
 
         if ($stmt->execute()) {
             echo "<script>alert('¡Registro exitoso! Ya puedes iniciar sesión.'); window.location.href='login.php';</script>";
@@ -37,4 +39,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $verificar->close();
     $conexion->close();
 }
+?>
 ?>

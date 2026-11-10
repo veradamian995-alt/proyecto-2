@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("conexion/conexion.php");
+include ("../conexion/conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
@@ -15,14 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Comparamos usando la columna 'contrasena' sin eñe
         if (password_verify($password_ingresada, $usuario['contrasena'])) {
+            // Guardamos todas las credenciales clave en la sesión
+            $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['nombre_usuario'] = $usuario['nombre'];
             $_SESSION['usuario'] = $usuario['email'];
+            $_SESSION['direccion'] = $usuario['direccion'];
             
-            echo "<script>alert('¡Bienvenido!'); window.location.href='index.php';</script>";
+            echo "<script>alert('👋 ¡Bienvenido de nuevo a BADE, " . $usuario['nombre'] . "!'); window.location.href='../index.php';</script>";
         } else {
-            echo "<script>alert('Contrasena incorrecta.'); window.location.href='login.php';</script>";
+            echo "<script>alert('Contraseña incorrecta.'); window.location.href='login.php';</script>";
         }
     } else {
         echo "<script>alert('El correo no está registrado.'); window.location.href='login.php';</script>";
